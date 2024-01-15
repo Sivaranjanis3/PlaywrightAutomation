@@ -1,5 +1,6 @@
 const { count } = require("console")
-
+const person=require('./class.js')
+const Person = require("./class.js")
 let namedf='tuesday '
 console.log(namedf.length)
 let namesec=namedf.slice(0,4)
@@ -26,3 +27,5 @@ counto++
 val=con.indexOf("day",val+1)
 }
 console.log(counto)
+let person2=new Person("Sivaranjani"," Subramaniyan")
+console.log(person2.fullname())
