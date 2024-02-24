@@ -1,14 +1,30 @@
 const {test,expect}=require('@playwright/test');
 const { log } = require('console');
-test('Client App Project',async ({page})=>{
-    const email="anshika@gmail.com"
-    const productName="ZARA COAT 3"
-    const products=page.locator(".card-body")
+let webcontext;
+const email="anshika@gmail.com";
+
+test.beforeAll(async({browser})=>{
+    
+    
+   
+    const context=await browser.newContext();
+    const page=await context.newPage();
     await page.goto("https://rahulshettyacademy.com/client")
     await page.locator('#userEmail').fill(email)
     await page.locator('#userPassword').fill("Iamking@000");
     await page.locator("[name='login']").click();
     //await page.getByRole('button', { name: 'Login' }).click();
+    await context.storageState({path: 'state.json'});
+    webcontext=await browser.newContext({storageState: 'state.json'});
+
+});
+
+
+test('Client App Project',async ()=>{
+    const productName="ZARA COAT 3"
+    const page=await webcontext.newPage();
+    await page.goto("https://rahulshettyacademy.com/client")
+    const products=page.locator(".card-body")
     await products.nth(1).waitFor();
     const count1=await products.count();
     console.log(count1)
