@@ -18,3 +18,18 @@ test('More Validation',async({page})=>{
  console.log(cont.split(" ")[1])
 
 });
+
+test.only('Sccreeenshot & visual comaprision',async({page})=>{
+    await page.goto("https://rahulshettyacademy.com/AutomationPractice/");
+    expect(await page.locator("#displayed-text")).toBeVisible();
+    await page.locator("#displayed-text").screenshot({path:'locator screenshot.png'});
+ await page.locator("#hide-textbox").click();
+ await page.screenshot({path:'screenshot.png'})
+ expect(await page.locator("#displayed-text")).toBeHidden();
+
+});
+
+test.only('Visual comparision',async({page})=>{
+await page.goto("https://flightware.com/");
+expect(await page.screenshot()).toMatchSnapshot('landing.png');
+});
