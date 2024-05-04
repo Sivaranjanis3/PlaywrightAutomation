@@ -1,0 +1,4 @@
+"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
+"passed","Sun Mar 10 13:02:32 IST 2024","Sun Mar 10 13:02:42 IST 2024","9382","chromium","morevalidation.spec.js","","","","@web Sccreeenshot & visual comaprision",""
+"failed","Sun Mar 10 13:02:32 IST 2024","Sun Mar 10 13:02:44 IST 2024","11860","chromium","ClientAppPO.spec.js","","","","@web Client App Project ZARA COAT 3",""
+"failed","Sun Mar 10 13:02:32 IST 2024","Sun Mar 10 13:02:45 IST 2024","12420","chromium","ClientAppPO.spec.js","","","","@web Client App Project ADIDAS ORIGINAL",""

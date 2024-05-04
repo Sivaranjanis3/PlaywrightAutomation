@@ -1,9 +1,10 @@
 const {test,expect}=require('@playwright/test');
+const {customtest}=require('../utils/test-data')
 const {POManager}=require('../pageobjects/POManager')
-const {cartPage}=require('../pageobjects/cartPage')
-const data=JSON.parse(JSON.stringify(require('../utils/placeordertestdata.json')))
+const dataset=JSON.parse(JSON.stringify(require('../utils/placeordertestdata.json')))
 const { log } = require('console');
-test('Client App Project',async ({page})=>{
+for(const data of dataset){
+test(`@web Client App Project ${data.productName}`,async ({page})=>{
     const pomanager= new POManager(page);
     const loginPage=pomanager.getloginpage();
     await loginPage.goto();
@@ -11,12 +12,9 @@ test('Client App Project',async ({page})=>{
     const dashboardPage=pomanager.getdashboardpage();
     await dashboardPage.searchproduct(data.productName);
     await dashboardPage.navigatetocart();
-    const cartpage=new cartPage(page);
-    await cartpage.gotocheckout();
-    
     
     await page.locator('div li').first().waitFor();
-    const bool=await page.locator("h3:has-text('ZARA COAT 3')").isVisible();
+    const bool=await page.locator("h3:has-text('"+data.productName+"')").isVisible();
     expect(bool).toBeTruthy();
 
     await page.locator("text=checkout").click();
@@ -34,7 +32,7 @@ test('Client App Project',async ({page})=>{
  await expect(page.locator(".user__name [type='text']").first()).toHaveText(data.username)
  await page.locator(".btnn").click();
  await expect(page.locator(".hero-primary")).toHaveText(" Thankyou for the order. ")
- const id=await page.locator(".em-spacer-1 .ng-star-inserted").textContent()
+ const id=await page.locator(".em-spacer-1 .ng-star-inserted").textContent();
  console.log(id)
 await page.locator("[routerlink='/dashboard/myorders']").first().click();
 const rows=await page.locator("tbody tr");
@@ -49,3 +47,21 @@ for(let i=0;i<await rows.count();i++){
 
 
  });
+}
+
+
+customtest(`Client App Project`,async ({page,testdataforOrder})=>{
+    const pomanager= new POManager(page);
+    const loginPage=pomanager.getloginpage();
+    await loginPage.goto();
+    await loginPage.validLogin(testdataforOrder.username,testdataforOrder.password)
+    const dashboardPage=pomanager.getdashboardpage();
+    await dashboardPage.searchproduct(testdataforOrder.productName);
+    await dashboardPage.navigatetocart();
+    
+    await page.locator('div li').first().waitFor();
+    const bool=await page.locator("h3:has-text('"+testdataforOrder.productName+"')").isVisible();
+    expect(bool).toBeTruthy();
+
+    await page.locator("text=checkout").click();
+});

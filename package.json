@@ -3,15 +3,25 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "regression": "npx playwright test",
+    "webtest": "npx playwright test --grep @web",
+    "chromebrowser": "npx playwright test tests/clientAppPO.spec.js"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@playwright/test": "^1.40.1",
-    "@types/node": "^20.10.6"
+    "@types/node": "^20.10.6",
+    "allure-commandline": "^2.27.0",
+    "allure-playwright": "^2.14.1",
+    "cucumber": "^6.0.7"
   },
   "dependencies": {
-    "exceljs": "^4.4.0"
+    "@cucumber/cucumber": "^10.3.1",
+    "exceljs": "^4.4.0",
+    "node-util": "0.0.1",
+    "util": "^0.12.5"
   }
 }

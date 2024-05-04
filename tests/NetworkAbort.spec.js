@@ -4,9 +4,9 @@ const context= await browser.newContext();
 const page=await context.newPage();
 await page.goto("https://google.com")
 });
-
 test('Page playwright test',async ({page})=>{
-    await page.route('**/*.{jpg,png,jpeg}',route=>route.abort());
+    await page.route('**/*.{jpg,png,jpeg}'
+,route=>route.abort());
 await page.goto("https://rahulshettyacademy.com/loginpagePractise/")
 page.on('request',request=>console.log(request.url()));
 page.on('response',response=>console.log(response.url(),response.status()))

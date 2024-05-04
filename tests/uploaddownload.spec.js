@@ -29,7 +29,7 @@ async function readexcel(worksheet,searchtext){
 
 
 
-test.only('Upload doenload test',async({page})=>{
+test('Upload doenload test',async({page})=>{
     const textsearch="Mango";
     const updatevalue='350';
     await page.goto('https://rahulshettyacademy.com/upload-download-test/index.html');

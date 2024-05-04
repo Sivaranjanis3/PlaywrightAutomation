@@ -1,4 +1,6 @@
 const{test,expect}= require('@playwright/test');
+
+test.describe.configure({mode:'serial'});
 test('More Validation',async({page})=>{
  await page.goto("https://rahulshettyacademy.com/AutomationPractice/");
  //await page.goto("https://google.com");
@@ -19,17 +21,17 @@ test('More Validation',async({page})=>{
 
 });
 
-test.only('Sccreeenshot & visual comaprision',async({page})=>{
+test.only('@web Sccreeenshot & visual comaprision',async({page})=>{
     await page.goto("https://rahulshettyacademy.com/AutomationPractice/");
     expect(await page.locator("#displayed-text")).toBeVisible();
     await page.locator("#displayed-text").screenshot({path:'locator screenshot.png'});
  await page.locator("#hide-textbox").click();
- await page.screenshot({path:'screenshot.png'})
+ await page.screenshot({path:'./tests/output/scree.png'})
  expect(await page.locator("#displayed-text")).toBeHidden();
 
 });
 
-test.only('Visual comparision',async({page})=>{
+test('Visual comparision',async({page})=>{
 await page.goto("https://flightware.com/");
 expect(await page.screenshot()).toMatchSnapshot('landing.png');
 });

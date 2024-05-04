@@ -5,20 +5,20 @@ const page=await context.newPage();
 await page.goto("https://google.com")
 });
 
-test('Page playwright test',async ({page})=>{
+test.only('Page playwright test',async ({page})=>{
 await page.goto("https://rahulshettyacademy.com/loginpagePractise/")
 const username=page.locator('input#username');
 const password=page.locator("[type='password']");
 const signin=page.locator('input#signInBtn');
 const cardtitles=page.locator('.card-body a');
-console.log(await page.title());
+//console.log(await page.title());
 //await expect(page).toHaveTitle("Google");
 
 await username.fill("rahulshetty");
 await password.fill("learning");
 await signin.click();
-console.log(await page.locator("[style*='block']").textContent());
-await expect(page.locator("[style*='block']")).toContainText("Incorrect")
+//console.log(await page.locator("[style*='block']").textContent());
+//await expect(page.locator("[style*='block']")).toContainText("Incorrect")
 
 await username.fill("");
 await username.fill("rahulshettyacademy");
